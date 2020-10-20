@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+{% csrf_token %}
+
+<a class="corner_logo" href="../home">
+    <img class="mt-2" src="{% static 'images/dalisay_logo_no_bg.png'%}" height="50" alt="">
+</a>
+<div id="fixed_navbar" class="container-fluid">
+</div>
+
+<img src="{% static 'images/about_image.jpg' %}" class="img-fluid w-50" alt="Responsive image">
+
+<div>
+    Hey!!!
+</div>
+{% endblock %}

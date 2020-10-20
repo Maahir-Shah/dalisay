@@ -1,0 +1,486 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/91b553d820.js" crossorigin="anonymous"></script>
+    <title>Dalisay - Sinfully Pure</title>
+  </head>
+  <style>
+        /* Background of website */
+        .backdrop {
+            background-image: url("{%static 'images/marble_backdrop.jpg'%}");
+        }
+
+        /* Logo on the fixed navbar */
+        .corner_logo {
+            position: absolute;
+            z-index: 4;
+        }
+
+        /* Fixed Navabar at top on pages other than homepage */
+        #fixed_navbar {
+            height: 50px;
+            background: #fffbfb;
+            z-index: 3;
+        }
+
+        /* Font of Dalisay main logo */
+        @font-face {
+            font-family: 'dalisay_main_font';
+            src: url("{%static 'fonts/dalisay_logo_font.ttf'%}");
+        }
+
+        /* Styling the footer */
+        .footer {
+            bottom: 0;
+            line-height: 30px; /* Vertically center the text there */
+            background: linear-gradient(to right, #ec2151 , #f3592e);
+            color: #fffbfb;
+        }
+        
+        /* Styling the bold icons added to the website */
+        .footer .fab {
+            margin-right:50px;
+            color: #fffbfb;
+        }
+
+        /* Styling the outermost checkout layout */
+        .checkout_layout {
+            background: #fffbfb;
+            height: 85%;
+            border-radius: 20px;
+            border: 2px solid #ec215020;
+        }
+
+        /* Styling the layout of the div with the order items */
+        .order_items {
+            height:50vh; 
+            overflow-y: scroll; 
+            overflow-x:hidden;
+        }
+
+        /* Styling the layout of each item in the order */
+        .shopping_cart_item {
+            background-color: white;
+            box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.04);
+        }
+
+        /* Styling the layout of the delivery form */
+        .delivery_detail_form {
+            background: #EC2151; 
+            border-radius: 20px; 
+            color: white; 
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        /* Styling the layout of the input for the delivery form*/
+        .input-group {
+            width: 100%;
+        }
+
+        .form_input_layout {
+            border-radius: 8px 0px 0px 8px;
+        }
+
+        /* Styling the layout of the verfification of the input for the delivery form*/
+        .form_verify_layout {
+            border-radius: 0px 8px 8px 0px;
+            background-color: white;
+        }
+
+        .form_verify_layout .fa-times {
+            color: red !important;
+        }
+
+        .form_verify_layout .fa-check {
+            color: rgb(39, 202, 39) !important;
+        }
+
+        /* Styling the layout of the submit button for the delivery form*/
+        .delivery_form_submit {
+            border: none;
+            background-color: #fffbfb;
+            border-radius: 15px;
+        }
+
+  </style>
+  <body class="backdrop">
+    <a class="corner_logo" href="../home">
+        <img class="mt-2" src="{% static 'images/dalisay_logo_no_bg.png'%}" height="40" alt="">
+    </a>
+    <div id="fixed_navbar" class="container-fluid">
+    </div>
+
+    <div class="checkout_layout container mt-4 mb-4">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-7 mt-3 mb-3" style="background: none; height: 100%">
+                <div class="col-12 mt-4">
+                    <a class="d-flex mt-2" href="../products" style="color: black !important;">
+                        <h6 class="ml-2 mr-2">
+                            &#8592
+                        </h6>
+                        <h6>
+                            Continue Shopping
+                        </h6>
+                    </a>
+                    <hr color="red">
+                    <h4 class="ml-2"> YOUR ORDER</h4>
+                </div>
+
+                <div class="order_items col-12">
+                    <div id="shopping_cart_item_template" class="collapse">
+                        <div class="row mb-3 shopping_cart_item_template">
+                            <div class="shopping_cart_item col-12 d-flex">
+                                <div class="mt-2 mb-2 col-8 compress_info">
+                                    <h6>
+                                        <strong id="shopping_cart_item_name">Product Name</strong>
+                                        <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
+                                    </h6>
+                                    <div id="shopping_cart_item_category">
+                                        Product Category
+                                    </div>
+                                    <div id="product_details" class="collapse">
+                                        <div id="shopping_cart_item_description" class="text-muted mb-1">
+                                            Product Description
+                                        </div>
+                                        <div id="product_tags" class="d-inline">
+                                            <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-lg"></span>
+                        
+                                            <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                                                
+                                            <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-lg"></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="shopping_cart_item_change_details mr-1 fas fa-minus fa-md update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="remove"></span>
+                                        <span id="shopping_cart_item_quantity">Item Quantity</span>
+                                        <span class="shopping_cart_item_change_details ml-1 fas fa-plus fa-md update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="add"></span>
+                                    </div>
+                                </div>
+                                <div id="shopping_cart_item_total" class="mt-3 mb-3 col-3 col-sm-2 text-left">
+                                    Item Total <!-- Total Item Price-->
+                                </div>
+                                <div class="mt-3 mb-3 col-1 col-sm-2">
+                                    <div class="ml-0 ml-sm-2">
+                                        <span class="shopping_cart_item_change_details far fa-trash-alt fa-lg update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="delete"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="shopping_cart_items">
+                        <!-- Items added to cart-->
+                        {% for item in order_items %}
+                            <div class="row mb-3">
+                                <div class="shopping_cart_item col-12 d-flex">
+                                    <div class="mt-2 mb-2 col-8 compress_info">
+                                        <h6>
+                                            <strong id="shopping_cart_item_name">{{item.product.name}}</strong>
+                                            <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
+                                        </h6>
+                                        <div id="shopping_cart_item_category">
+                                            {{item.product.category}}
+                                        </div>
+                                        <div id="product_details" class="collapse">
+                                            <div id="shopping_cart_item_description" class="text-muted mb-1">
+                                                {{item.product.description}}
+                                            </div>
+                                            <div id="product_tags" class="d-inline">
+                                                {% if item.product.vegan %}
+                                                <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-lg"></span>
+                                                {% endif %}
+                            
+                                                {% if item.product.gluten_free %}
+                                                <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                                                {% endif %}
+                                                    
+                                                {% if item.product.customizable %}
+                                                <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-lg"></span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="shopping_cart_item_change_details mr-1 fas fa-minus fa-md update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="remove"></span>
+                                            <span id="shopping_cart_item_quantity">{{item.quantity}}</span>
+                                            <span class="shopping_cart_item_change_details ml-1 fas fa-plus fa-md update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="add"></span>
+                                        </div>
+                                    </div>
+                                    <div id="shopping_cart_item_total" class="mt-3 mb-3 col-3 col-sm-2 text-left">
+                                        {{item.get_item_total}} <!-- Total Item Price-->
+                                    </div>
+                                    <div class="mt-3 mb-3 col-1 col-sm-2">
+                                        <div class="ml-0 ml-sm-2">
+                                            <span class="shopping_cart_item_change_details far fa-trash-alt fa-lg update_cart" style="color: red;" data-product="{{item.product.id}}" data-action="delete"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- End Items added to cart-->
+                    </div>
+                    <div class="justify-content-center">
+                        <div class="col-12">
+                            <strong>Order Note</strong>
+
+                            <div class="text-muted mb-2">
+                                {% if order.note == '' %}
+                                No Note To Add
+                                {% else %}
+                                {{order.note}}
+                                {% endif %}
+                            </div>
+                            
+                            <strong>Hamper</strong>
+
+                            {% if order.hamper %}
+                            <div class="row mb-2">
+                                <div class="col-8 text-muted">
+                                    Yes
+                                </div>
+                                <div id="shopping_cart_item_hamper_price" class="col-1 text-right">
+                                    {{order.hamper_price}} <!-- Price of hamper -->
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="text-muted mb-2">
+                                No
+                            </div>
+                            {% endif %}
+
+                            <strong> Delivery</strong>
+                            <div class="row mb-2">
+                                <div class="col-8 text-muted">
+                                    Delivery Cost
+                                </div>
+                                <div id="shopping_cart_item_delivery_price" class="col-1 text-right">
+                                    <span>
+                                        {% if order.total < 1500 %}
+                                        80
+                                        {% else %}
+                                        0
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="col-12 text-muted text-left" style="font-size: 11px;">
+                                    We offer free delivery for orders above Rs. 1500
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr color="red">
+
+                <div class="col-12 mt-2 shopping_cart_item">
+                    <div class="d-flex">
+                        <div class="col-8 mt-3 mb-2">
+                            <strong>Order Items</strong>
+                        </div>
+                        <div id="shopping_cart_number_of_items" class="mt-3 mb-2 col-3 col-sm-2 text-left ml-3">
+                            {{order.number_of_items}} <!-- Total No. of items-->
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-8 mt-2 mb-3">
+                            <strong>Order Total</strong>
+                        </div>
+                        <div id="shopping_cart_order_total" class="mt-2 mb-3 col-3 col-sm-2 text-left">
+                            {{order.total_with_delivery}} <!-- Cart Total-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-11 col-lg-5 mt-4 mb-4">
+                <div class="delivery_detail_form container mt-3 mb-3">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <h4 class="mt-3">
+                                DELIVERY DETAILS
+                            </h4>
+                            <!-- Delivery Details Form-->
+                            <form id="delivery_form" onsubmit="return false">
+                                {% csrf_token %}
+                                <div>
+                                    <input type="hidden" name="key" value="{{ key }}" />            
+                                    <input type="hidden" name="hash" value="{{ hash }}"/>            
+                                    <input type="hidden" name="txnid" value="{{ txnid }}" />
+                                    <input type="hidden" name="amount" value="{{ amount }}" />
+                                    <input type="hidden" name="email" value="{{ email }}" />
+                                    <input type="hidden" name="firstname" value="{{ firstname }}" />
+                                    <input type="hidden" name="phone" value="{{ phone }}" />
+                                    <input type="hidden" name="productinfo" value="{{ productinfo }}"/>
+                                    <input type="hidden" name="surl" value="{{ surl }}"/>
+                                    <input type="hidden" name="furl" value="{{ furl }}" />
+                                    <input type="hidden" name="service_provider" value="{{ service_provider }}" />
+                                </div>
+                                <div>
+                                    <label>Name</label>
+                                    <div class="input-group">
+                                        <input id="delivery_form_name" type="text" class="form_input_layout form-control" name="name" value="" required placeholder="Full Name">
+                                        <div class="input-group-append">
+                                            <span class="form_verify_layout input-group-text">
+                                                <span id="verification_name" class="mt-1 fas fa-lg"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <small id="warning_name" class="hidden"> *Please enter a valid Name</small>
+                                </div>
+
+                                <div>
+                                    <label>Email address</label>
+                                    <div class="input-group">
+                                        <input id="delivery_form_email" type="email" class="form_input_layout form-control" name="email" value="" required placeholder="Email Address">
+                                        <div class="input-group-append">
+                                            <span class="form_verify_layout input-group-text">
+                                                <span id="verification_email" class="mt-1 fas fa-lg"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <small id="warning_email" class="hidden"> *Please enter a valid Email Address</small>
+                                </div>
+
+                                <div>
+                                    <label>Phone Number</label>
+                                    <div class="input-group">
+                                        <input id="delivery_form_phone" type="number" class="form_input_layout form-control" name="phone_number" value="" required placeholder="Phone Number" onkeydown= "javascript: return event.keyCode === 8||event.keyCode === 46 ? true : !isNaN(Number(event.key))"/>
+                                        <div class="input-group-append">
+                                            <span class="form_verify_layout input-group-text">
+                                                <span id="verification_phone" class="mt-1 fas fa-lg"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <small id="warning_phone" class="hidden"> *Please enter a valid 10-digit Phone Number</small>
+                                </div>
+
+                                <div>
+                                    <label>Delivery Address</label>
+                                    <div class="input-group">
+                                        <input id="delivery_form_address" type="text" class="form_input_layout form-control" name="address" value="" required placeholder="Delivery Address">
+                                        <div class="input-group-append">
+                                            <span class="form_verify_layout input-group-text">
+                                                <span id="verification_address" class="mt-1 fas fa-lg"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <small id="warning_address" class="hidden"> *Please enter a valid Address</small>
+                                </div>
+
+                                <div class="row mb-2 mb-lg-1 mb-xl-2 d-flex">
+                                    <div class="col-12 col-sm-6">
+                                        <label>City</label>
+                                        <div class="input-group">
+                                            <input id="delivery_form_city" type="text" class="form_input_layout form-control" name="city" value="" required placeholder="City">
+                                            <div class="input-group-append">
+                                                <span class="form_verify_layout input-group-text">
+                                                    <span id="verification_city" class="mt-1 fas fa-lg"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small id="warning_city" class="hidden"> *Please enter a valid name</small>
+                                    </div>
+
+                                    <div class="col-12 col-sm-6">
+                                        <label>Postal Code</label>
+                                        <div class="input-group">
+                                            <input id="delivery_form_postal" type="number" class="form_input_layout form-control" name="postal_code" value="" required placeholder="Postal Code" maxlength="6" onkeydown= "javascript: return event.keyCode === 8||event.keyCode === 46 ? true : !isNaN(Number(event.key))"/>
+                                            <div class="input-group-append">
+                                                <span class="form_verify_layout input-group-text">
+                                                    <span id="verification_postal" class="mt-1 fas fa-lg"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <small id="warning_postal" class="mb-0 hidden"> *Please enter a 6-digit Code</small>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <button id="delivery_form_submit" class="delivery_form_submit col-12 justify-content-center" type="submit">
+                                        <div class="mt-4 mb-4 d-sm-flex">
+                                            <h4 id="checkout_total_price" class="col-12 col-sm-4 text-center">{{order.total_with_delivery}}<!-- Cart Total--></h4>
+                                            <h4 class="offset-sm-2 offset-lg-1 col-12 col-sm-7 text-center">Checkout &#8594</h4>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- End Form-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <a href="../home">
+                        <img class="mt-5" src="{% static 'images/dalisay_white_logo_no_bg.png'%}" height="50" alt="">
+                        </a>
+                        <p class="mb-5"> Description of Dalisay</p>
+                        <div class="float-md-center mb-5">
+                            <ul class="list-unstyled">
+                                <li class="ftco-animate">
+                                    <a href="https://www.instagram.com/dalisay_india/?hl=en"><span class="fab fa-instagram fa-2x"></span></a>
+                                    <a href="https://www.facebook.com/dalisay_india-661919467650639"><span class="fab fa-facebook-square fa-2x"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Contact Us</h6>
+                        <p><i class="fas fa-phone mr-3 fa-lg"></i> +91 9820297966</p>
+                        <p class="text-left pl-5">+91 9820297966</p>
+                        <p><i class="fas fa-envelope mr-3 fa-lg"></i> connect@dalisay.co.in</p>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <h6 class="text-uppercase mt-5 font-weight-bold">Instagram</h6>
+                        <a href="https://www.instagram.com/dalisay_india/?hl=en">
+                        <p class="text-white font-weight-bold">@dalisay_india</p>
+                        </a>
+                        <div class="d-flex">
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_1.png' %}" class="img-fluid" alt="">
+                            </a>
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_2.png' %}" class="img-fluid" alt="">
+                            </a>
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_3.png' %}" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                        <div class="mb-5 d-flex">
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_4.png' %}" class="img-fluid" alt="">
+                            </a>
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_5.png' %}" class="img-fluid" alt="">
+                            </a>
+                            <a><img src="{% static 'images/instagram_footer/dalisay_insta_6.png' %}" class="img-fluid" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- Javascript for Functionality of Checkout Page -->
+    <script type="text/javascript" src= "{% static 'js/checkout_3.js' %}"></script>
+
+    <!-- Optional JavaScript -->
+    <script type="text/javascript">
+    </script>
+  </body>

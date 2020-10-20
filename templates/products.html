@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% csrf_token %}
+
+<div id="fixed_navbar" class="container-fluid">
+</div>
+
+<img src="{% static 'images/products_image_.jpg' %}" class="img-fluid w-100" alt="Responsive image">
+
+<div class="container notices mt-4 mb-2">
+    <div class="row mt-2 mb-2">
+        <div class="col-12 mb-2" style="color: #cc264a;">
+            * We honor our mandate of providing our customers with fresh products. All products are made-to-order, with fresh produce and ingredients, and without any preservatives or artificial supplements.<br>
+            To enable this, all orders will be delivered to you within an estimate of 1-2 business days of receiving the order.
+            For larger orders, the delivery time may vary. Please <a href="../contact" style="color: #cc264a;">contact us </a> for further questions.
+        </div>
+    </div>
+</div>
+
+{% for category in categories %}
+{% if category.visible %}
+    <div class="container compress_info">
+        <div class="d-inline-flex">
+            <div class="logo_text_added text mt-4">
+                {{category}}
+            </div>
+            <a class="expand_products_toggle ml-3 mt-5 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
+        </div>
+
+        <div id="product_details" class="collapse row w-100 mt-1 mb-4">
+        {% for product in products %}
+            {% if product.category == category %}
+                {% if product.visible %}
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="animate_product show-on-scroll card">
+                        <img src="{%static 'images/dalisay_background_card.png'%}" class="img-fluid justify-content-end" alt="">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">{{product.name}}</h6>
+                            <p class="text-muted">{{product.description}}</p>
+
+                            {% if product.vegan %}
+                            <div class="text-left"><span class="mr-3 mb-3 fas fa-leaf fa-lg"></span> Vegan</div>
+                            {% endif %}
+
+                            {% if product.gluten_free %}
+                            <div class="text-left"><span class="mr-3 mb-3 fab fa-glide-g fa-lg"></span> Gluten-Free</div>
+                            {% endif %}
+                            
+                            {% if product.customizable %}
+                            <div class="text-left"><span class="mr-3 mb-3 fas fa-info fa-lg"></span> Customizable</div>
+                            {% endif %}
+
+                            <div class="row mt-auto">
+                                <span class="col-7 col-sm-7 col-lg-7 price">Rs. {{product.price}}</span>
+                                <a class="col-4 col-sm-5 col-md-4 offset-md-0 btn btn-outline-danger update_cart" data-product="{{product.id}}" data-action="add">
+                                    <span class="fas fa-cart-plus fa-lg"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

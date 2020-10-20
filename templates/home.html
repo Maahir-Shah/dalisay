@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% csrf_token %}
+
+<div class="front_display animate_logo_home">
+</div>
+<img src="{% static 'images/dalisay_logo_no_bg.png' %}" class="animate_logo_home img-fluid front_display_img" alt="Responsive image">
+
+<img src="{% static 'images/dalisay_homepage_image.jpg' %}" class="img-fluid w-100" alt="Responsive image">
+
+<div id="homepage_card" class="d-block container mt-5 mb-5 text-right">
+    <div class="shape_image ml-md-n3 mt-3 mt-md-0">
+        <img src="{%static 'images/about_image_homepage.jpg'%}" class="img-fluid w-100" alt="Responsive image">
+    </div>
+    <div class="row d-block justify-content-end mt-md-5">
+        <div class="logo_text_added col-md-4 offset-md-8 mr-5 text">
+            About
+        </div>
+        <div class="col-md-4 offset-md-8 text-right mr-5">
+            Come see how we came up with this concept, and why we decided to start this company
+        </div>
+        <a href="../about" role="button" class="btn btn-danger mt-2 mt-md-4 mr-2 mr-sm-5">Learn More</a>
+    </div>
+</div>
+
+<div id="homepage_card" class="d-block container mt-5 mb-5 text-right">
+    <div class="shape_image ml-md-n3 mt-4 mt-md-0">
+        <img src="{%static 'images/about_image_homepage.jpg'%}" class="img-fluid w-100" alt="Responsive image">
+    </div>
+    <div class="row d-block justify-content-end mt-lg-5">
+        <div class="logo_text_added col-md-4 offset-md-8 mr-5 text">
+            Our Products
+        </div>
+        <div class="col-md-4 offset-md-8 text-right mr-5">
+            Come see how we came up with this concept, and why we decided to start this company
+        </div>
+        <a href="../products" role="button" class="btn btn-danger mt-2 mt-md-4 mr-2 mr-sm-5">Learn More</a>
+    </div>
+</div>
+
+<div id="homepage_card" class="d-block container mt-5 mb-5 text-right">
+    <div class="shape_image ml-md-n3 mt-4 mt-md-0">
+        <img src="{%static 'images/about_image_homepage.jpg'%}" class="img-fluid w-100" alt="Responsive image">
+    </div>
+    <div class="row d-block justify-content-end mt-md-5">
+        <div class="logo_text_added col-md-4 offset-md-8 mr-5 text">
+            Contact Us
+        </div>
+        <div class="col-md-4 offset-md-8 text-right mr-5">
+            Come see how we came up with this concept, and why we decided to start this company
+        </div>
+        <a href="../contact" role="button" class="btn btn-danger mt-2 mt-md-4 mr-2 mr-sm-5">Learn More</a>
+    </div>
+</div>
+
+{% endblock %}
