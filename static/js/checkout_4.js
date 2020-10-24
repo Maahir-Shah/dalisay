@@ -281,8 +281,30 @@ delivery_form_postal.addEventListener('change', function() {
 // Function to send Order + Delivery details to Backend
 let checkout_button = document.getElementById('delivery_form_submit');
 checkout_button.addEventListener('click', function() {
-    submitData();
+    var checkout_price;
+    processCheckout();
 })
+
+function processCheckout() {
+    cart_cookie = JSON.parse(getCookie('cart'));
+
+    fetch('/update_cart/', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+            mode: 'same-origin'
+        },
+        body:JSON.stringify({
+            'cart': cart_cookie
+        })
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        checkout_price = data['order']['total_with_delivery'];
+        submitData();
+    })
+}
 
 function submitData() {
     let form = document.getElementById('delivery_form');
@@ -296,9 +318,6 @@ function submitData() {
         'postal_code': form.postal_code.value
     }
 
-    let total_price = document.getElementById('checkout_total_price').innerText
-    let checkout_total_price = parseInt(total_price, 10);
-
     var url = '/process_order/'
     fetch(url, {
         method: 'POST',
@@ -309,14 +328,34 @@ function submitData() {
         },
         body:JSON.stringify({
             'delivery_details': UserDeliveryDetails,
-            'cart_total': checkout_total_price
+            'cart_total': checkout_price
         })
     })
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
+        proceedToPayment();
 
         // cart = {'order_note': '', 'hamper': false}
         // document.cookie = "cart =" + JSON.stringify(cart) + ';domain=;expires='+now.toGMTString()+';path=/';
     })
+}
+
+function proceedToPayment() {
+    let form = document.getElementById('delivery_form');
+    let payment_details_form = document.getElementById('payment_details_form');
+    var name = form.name.value;
+    let firstname = name.split(" ")[0]
+    checkout_price = checkout_price.toFixed(2) // Convert to Float
+
+    payment_details_form.firstname.value = firstname
+    payment_details_form.email.value = form.email.value
+    payment_details_form.phone.value = form.phone_number.value
+    payment_details_form.amount.value = checkout_price // type is integer - need to convert to float in python
+    payment_details_form.productinfo.value = 'Food items added to cart'
+    payment_details_form.surl.value = '../success'
+    payment_details_form.furl.value = '../failure'
+    payment_details_form.service_provider.value = 'payu_paisa' // Change if needed
+
+    payment_details_form.submit();
 }

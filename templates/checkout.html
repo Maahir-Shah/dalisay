@@ -311,19 +311,6 @@
                             <form id="delivery_form" onsubmit="return false">
                                 {% csrf_token %}
                                 <div>
-                                    <input type="hidden" name="key" value="{{ key }}" />            
-                                    <input type="hidden" name="hash" value="{{ hash }}"/>            
-                                    <input type="hidden" name="txnid" value="{{ txnid }}" />
-                                    <input type="hidden" name="amount" value="{{ amount }}" />
-                                    <input type="hidden" name="email" value="{{ email }}" />
-                                    <input type="hidden" name="firstname" value="{{ firstname }}" />
-                                    <input type="hidden" name="phone" value="{{ phone }}" />
-                                    <input type="hidden" name="productinfo" value="{{ productinfo }}"/>
-                                    <input type="hidden" name="surl" value="{{ surl }}"/>
-                                    <input type="hidden" name="furl" value="{{ furl }}" />
-                                    <input type="hidden" name="service_provider" value="{{ service_provider }}" />
-                                </div>
-                                <div>
                                     <label>Name</label>
                                     <div class="input-group">
                                         <input id="delivery_form_name" type="text" class="form_input_layout form-control" name="name" value="" required placeholder="Full Name">
@@ -412,6 +399,17 @@
                                     </button>
                                 </div>
                             </form>
+                            <form id="payment_details_form" method="POST" action="../process_payment/">
+                                {% csrf_token %}
+                                <input type="hidden" name="firstname" value="" />            
+                                <input type="hidden" name="amount" value="" />
+                                <input type="hidden" name="email" value="" />
+                                <input type="hidden" name="phone" value="" />
+                                <input type="hidden" name="productinfo" value=""/>
+                                <input type="hidden" name="surl" value=""/>
+                                <input type="hidden" name="furl" value="" />
+                                <input type="hidden" name="service_provider" value="" />
+                            </form>
                             <!-- End Form-->
                         </div>
                     </div>
@@ -478,7 +476,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- Javascript for Functionality of Checkout Page -->
-    <script type="text/javascript" src= "{% static 'js/checkout_3.js' %}"></script>
+    <script type="text/javascript" src= "{% static 'js/checkout_4.js' %}"></script>
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">

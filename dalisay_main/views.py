@@ -5,6 +5,15 @@ from django.http import JsonResponse
 from .utils import cookieCart, guestOrder
 import datetime
 
+#Imports for PayU
+from django.http import HttpResponse,HttpResponseRedirect
+from django.template.loader import get_template
+from django.template import Context, Template
+import hashlib
+from random import randint
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.template.context_processors import csrf
+
 # Create your views here.
 
 def home(request):
@@ -174,4 +183,49 @@ def process_order(request):
         order = order
     )
 
-    return JsonResponse('Payment Complete', safe=False)
+    return JsonResponse('Order Complete', safe=False)
+
+def process_payment(request):
+
+    MERCHANT_KEY = "epTi4Mxn"
+    SALT = "hlV2iVOd9M"
+    PAYU_BASE_URL = "https://sandboxsecure.payu.in/_payment"
+    # Live PAYU_BASE_URL = "https://secure.payu.in/_payment"
+
+    action = ''
+    posted={}
+    # Merchant Key and Salt provided by PayU.
+    if request.method == 'POST':
+        for i in request.POST:
+            posted[i]=request.POST[i]
+        hash_object = hashlib.sha256(b'randint(0,20)')
+        txnid=hash_object.hexdigest()[0:20]
+        hashh = ''
+        posted['txnid']=txnid
+        hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
+        posted['key']=MERCHANT_KEY
+        hash_string=''
+        hashVarsSeq=hashSequence.split('|')
+        for i in hashVarsSeq:
+            try:
+                hash_string+=str(posted[i])
+            except Exception:
+                hash_string+=''
+            hash_string+='|'
+        hash_string+=SALT
+        hashh=hashlib.sha512(hash_string).hexdigest().lower()
+        action = PAYU_BASE_URL
+    return render(request, 'payment_details.html', {
+        "posted":posted,
+        "hashh":hashh,
+        "MERCHANT_KEY":MERCHANT_KEY,
+        "txnid":txnid,
+        "hash_string":hash_string,
+        "action":action
+    })
+
+def payment_success(request):
+    return render(request, 'success.html')
+
+def payment_failure(request):
+    return render(request, 'failure.html')
