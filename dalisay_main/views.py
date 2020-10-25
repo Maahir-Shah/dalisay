@@ -213,7 +213,9 @@ def process_payment(request):
                 hash_string+=''
             hash_string+='|'
         hash_string+=SALT
-        hashh=hashlib.sha512(hash_string).hexdigest().lower()
+        hash_encoded = hash_string.encode('utf-8')
+        hashh=hashlib.sha512(hash_encoded).hexdigest().lower()
+        print('Hash:', hashh)
         action = PAYU_BASE_URL
     return render(request, 'payment_details.html', {
         "posted":posted,
