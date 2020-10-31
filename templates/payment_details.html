@@ -21,31 +21,32 @@
       <br/>
       {% endif %}
      
-      <form action= {{action }} method="post" name="payuForm">{% csrf_token %}
-      <input type="hidden" name="key" value="{{ MERCHANT_KEY }}" />
-      <input type="hidden" name="hash_string" value="{{ hash_string }}" />
-      <input type="hidden" name="hash" value="{{ hashh }}"/>
-       <input type="hidden" name="posted" value="{{ posted }}"/>
-      <input type="hidden" name="txnid" value="{{ txnid }}" />
+      <form action="https://sandboxsecure.payu.in/_payment" method="post" name="payuForm">
+      {% csrf_token %}
+      <input type="" name="key" value="{{ MERCHANT_KEY }}" />
+      <input type="" name="hash_string" value="{{ hash_string }}" />
+      <input type="" name="hash" value="{{ hashh }}"/>
+       <input type="" name="posted" value="{{ posted }}"/>
+      <input type="" name="txnid" value="{{ txnid }}" />
       <table>
         <tr>
           <td><b>Mandatory Parameters</b></td>
         </tr>
         <tr>
          <td>Amount: </td>
-          <td><input name="amount" value="{{ posted.amount|default:'' }}" /></td>
+          <td><input name="amount" value="{{posted.amount}}" /></td>
           <td>First Name: </td>
-          <td><input name="firstname" id="firstname" value="{{ posted.firstname|default:'' }}" /></td>
+          <td><input name="firstname" id="firstname" value="{{posted.firstname}}" /></td>
         </tr>
         <tr>
           <td>Email: </td>
-          <td><input name="email" id="email" value="{{ posted.email|default:'' }}" /></td>
+          <td><input name="email" id="email" value="{{posted.email}}" /></td>
           <td>Phone: </td>
-          <td><input name="phone" value="{{ posted.phone|default:'' }}" /></td>
+          <td><input name="phone" value="{{posted.phone }}" /></td>
         </tr>
         <tr>
           <td>Product Info: </td>
-          <td colspan="3"><textarea name="productinfo">{{ posted.productinfo|default:'' }}</textarea></td>
+          <td colspan="3"><textarea name="productinfo">{{posted.productinfo}}</textarea></td>
         </tr>
         <tr>
           <td>Success URI: </td>

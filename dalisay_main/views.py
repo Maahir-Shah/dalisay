@@ -213,9 +213,9 @@ def process_payment(request):
                 hash_string+=''
             hash_string+='|'
         hash_string+=SALT
-        hash_encoded = hash_string.encode('utf-8')
+        hash_encoded = hash_string.encode()
         hashh=hashlib.sha512(hash_encoded).hexdigest().lower()
-        print('Hash:', hashh)
+        print('Hash:', hashh, 'Hash_string:', hash_string)
         action = PAYU_BASE_URL
     return render(request, 'payment_details.html', {
         "posted":posted,
@@ -226,8 +226,54 @@ def process_payment(request):
         "action":action
     })
 
+@csrf_protect
+@csrf_exempt
 def payment_success(request):
-    return render(request, 'success.html')
+    c = {}
+    c.update(csrf(request))
+    status=request.POST["status"]
+    firstname=request.POST["firstname"]
+    amount=request.POST["amount"]
+    txnid=request.POST["txnid"]
+    posted_hash=request.POST["hash"]
+    key=request.POST["key"]
+    productinfo=request.POST["productinfo"]
+    email=request.POST["email"]
+    salt="hlV2iVOd9M"
+    retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+    hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+    if(hashh !=posted_hash):
+        print ("Invalid Transaction. Please try again")
+    else:
+    	print ("Thank You. Your order status is ", status)
+    	print ("Your Transaction ID for this transaction is ",txnid)
+    	print ("We have received a payment of Rs. ", amount ,". Your order will soon be shipped.")
+    return render(request, 'success.html', {
+        "txnid":txnid,
+        "status":status,
+        "amount":amount
+        })
 
+@csrf_protect
+@csrf_exempt
 def payment_failure(request):
+    c = {}
+    c.update(csrf(request))
+    status=request.POST["status"]
+    firstname=request.POST["firstname"]
+    amount=request.POST["amount"]
+    txnid=request.POST["txnid"]
+    posted_hash=request.POST["hash"]
+    key=request.POST["key"]
+    productinfo=request.POST["productinfo"]
+    email=request.POST["email"]
+    salt=""
+    retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
+    hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+    if(hashh !=posted_hash):
+    	print ("Invalid Transaction. Please try again")
+    else:
+    	print ("Thank You. Your order status is ", status)
+    	print ("Your Transaction ID for this transaction is ",txnid)
+    	print ("We have received a payment of Rs. ", amount ,". Your order will soon be shipped.")
     return render(request, 'failure.html')
