@@ -240,6 +240,41 @@
       box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.04);
     }
 
+    .contact_card_each {
+      height: 200px;
+    }
+
+    .contact_card_each.top_card {
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      position: relative;
+      transform: translateY(100px);
+      z-index: 2;
+    }
+
+    .contact_card_each.bottom_card {
+      opacity: 0;
+      position: relative;
+      transform: translateY(-100px);
+    }
+
+    .contact_card:hover {
+      transform: scale(1.01);
+      transition-duration: 500ms;
+    }
+
+    .contact_card:hover .contact_card_each.top_card {
+      box-shadow: 0 0px 30px rgba(0,0,0,0.6);
+      transform: translateY(0px);
+      transition-duration: 500ms;
+    }
+
+    .contact_card:hover .contact_card_each.bottom_card {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      opacity: 1;
+      transform: translateY(0px);
+      transition-duration: 500ms;
+    }
+
     /* Adding specific changes to be made to the pages for medium and larger devices */
     @media (min-width: 768px) {
       #homepage_card:hover {
@@ -294,6 +329,10 @@
 
       .shopping_cart_layout {
         margin-top: 18%;
+      }
+
+      .contact_address_text {
+        font-size: 13px;
       }
     }
   
