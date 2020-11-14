@@ -102,6 +102,13 @@ def checkout(request):
         'order': order
     })
 
+def send_contact_form(request):
+    if request.method == 'POST':
+        for i in request.POST:
+            contact_form[i]=request.POST[i]
+    return render(request, 'contact_form.html')
+
+
 def process_order(request):
     transaction_id = datetime.datetime.now().timestamp()
 
