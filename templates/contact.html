@@ -7,18 +7,20 @@
 <div id="fixed_navbar" class="container-fluid">
 </div>
 
-<div style="position: relative;">
-    <div class="row w-100 justify-content-center mb-5 mt-5">
-        <div class="col-8 col-sm-6 col-lg-5 col-xl-3 align-middle mb-3 mt-3" style="border:4px solid #ec2151">
-            <div class="mt-3 mb-3 text-center" style="font-size:35px; color: #ec2151">
-                Contact Us
-            </div>
-        </div>
-    </div>
-    <!-- <img src="{% static 'images/Contact us bg.jpg'%}" class="w-100 img-fluid" alt="" style="z-index: 1" !-->
+<div class="text-center" style="position: relative;">
+    <img src="{% static 'images/contact_us_bg_img.png'%}" class="img-fluid mb-3" alt="" style="z-index: 1; width:100%">
 </div>
 
-<div class="container-fluid">
+<div class="mb-5 container-fluid">
+    <div class="row justify-content-center">
+        <div class="mt-md-5 mt-3 text-center w-100">
+            <strong class="text logo_text_added" >Connect With Us!</strong>
+        </div>
+        <div class="mt-1 text-center w-100">
+            <h4>Have some Questions? Need more information?</h4><br>
+            <h5><strong>Send us a message!</strong></h5>
+        </div>
+    </div>
     <div class="row justify-content-center mt-sm-3 mb-sm-3">
         <div class="contact_card col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3 mb-n4 mb-sm-0">
             <div class="contact_card_each top_card" style="background-color: #f698ae;">
@@ -63,7 +65,7 @@
                             <div class="col-12">
                                 <span class="d-sm-inline-flex mt-3 mb-4 text-center">
                                     <i class="fas fa-envelope-square mr-3 fa-3x"></i>
-                                    <h6 class="mt-3"> connect@dalisay.co.in</h6>
+                                    <h6 class="mt-3"><a href="mailto:connect@dalisay.co.in" style="color:black;">connect@dalisay.co.in</a></h6>
                                 </span>
                             </div>
                         </div>
@@ -74,42 +76,44 @@
         <div class="contact_card col-10 col-sm-7 col-md-6 col-lg-4 col-xl-3 mt-n5 mt-sm-0 mb-4 mb-sm-0">
             <div class="contact_card_each top_card" style="background-color: #f05f7f;">
                 <div class="h-100 w-100 text-center">
-                    <i class="fas fa-map-marker-alt fa-6x mt-5" style="color: #fffbfb;"></i>
+                    <img src="{% static 'images/dm_icon.png' %}" class="img-fluid mt-5" alt="" style="width: 100px;">
                 </div>
             </div>
             <div class="contact_card_each bottom_card text-center" style="background-color: #fffbfb;">
                 <div class="w-100 h-100">
                     <br>
-                    <div class="container mt-1">
-                        <h4 class="mb-2"><strong>Location</strong></h4>
+                    <div class="container mt-3">
+                        <h4 class="mb-2"><strong>Direct Messaging</strong></h4>
                         <div class="row justify-content-center">
-                            <div class="col-12">
+                            <div class="col-10">
                                 <span class="d-inline-flex mt-2 mb-2">
-                                    <i class="fas fa-map-marker mr-3 fa-2x"></i>
-                                    <h6 class="contact_address_text text-left"> Paras, 15 Little Gibbs Road, Malabar Hill, Mumbai</h6>
+                                    <i class="fab fa-instagram mr-3 fa-2x"></i>
+                                    <h6 class="mt-2"><a href="https://www.instagram.com/dalisay_india/?hl=en" style="color: black;" target="_blank">@dalisay_india</a></h6>
                                 </span>
-                                <span class="d-flex mt-2 mb-3">
-                                    <i class="fas fa-map-marker mr-3 fa-2x"></i>
-                                    <h6 class="contact_address_text text-left"> Paras, 15 Little Gibbs Road, Malabar Hill, Mumbai</h6>
+                                <span class="d-inline-flex mt-2 mb-2">
+                                    <i class="fab fa-facebook-square mr-3 fa-2x"></i>
+                                    <h6 class="mt-2"><a href="https://www.facebook.com/dalisay_india-661919467650639" style="color: black;" target="_blank">dalisay_india</a></h6>
                                 </span>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <!--
     <div class="mb-4 row justify-content-center">
         <div class="col-8 contact_form_layout">
             <div class="mt-3 text-center w-100">
-                <strong class="text logo_text_added" >Contact Us!</strong>
+                <strong class="text logo_text_added" >Connect With Us!</strong>
             </div>
             <div class="mt-1 mb-4 text-center w-100">
                 <span>Have some Questions? Need more information?</span><br>
                 <strong >Send us a message!</strong>
             </div>
-            <form id="contact_form" method="POST" action="../send_contact_form/" onsubmit="return false">
+            <form id="contact_form" method="POST" action="" onsubmit="return false">
                 {% csrf_token %}
                 <div class="mt-2 mb-4 form-group">
                     <span class="d-sm-flex justify-content-center">
@@ -158,6 +162,7 @@
             </form>
         </div>
     </div>
+    -->
 </div>
 
 {% endblock %}
