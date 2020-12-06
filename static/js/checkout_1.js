@@ -4,6 +4,11 @@ var time = now.getTime();
 var expireTime = time + 1000*1814400; // Set expiry of cookies to 3 weeks
 now.setTime(expireTime);
 
+// Remove Loader screen on loading
+$(window).on("load", function () {
+    $(".loader").fadeOut("slow");
+})
+
 // Set other variables needed
 var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 const shopping_cart_item_template = $('#shopping_cart_item_template').html();

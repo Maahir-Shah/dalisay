@@ -4,6 +4,11 @@ var time = now.getTime();
 var expireTime = time + 1000*1814400; // Set expiry of cookies to 3 weeks
 now.setTime(expireTime);
 
+// Remove Loader screen on loading
+$(window).on("load", function () {
+  $(".loader").fadeOut("slow");
+})
+
 // Function to change the active nav on the navbar
     // id of each nav is the same as the basename of the href
     $(document).ready(function() {
