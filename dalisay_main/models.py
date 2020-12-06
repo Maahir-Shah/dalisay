@@ -91,6 +91,14 @@ class OrderItem(models.Model):
     def get_item_total(self):
         total = self.product.price * self.quantity
         return total
+    
+    @property
+    def customer(self):
+        try:
+            customer_name = self.order.customer
+        except:
+            customer_name = 'Deleted'
+        return customer_name
 
 class DeliveryDetails(models.Model):
     date_ordered = models.DateField(auto_now_add=True)
