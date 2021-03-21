@@ -54,7 +54,7 @@
 
                             <div class="row mt-auto">
                                 <span class="col-7 col-sm-7 col-lg-7 price">Rs. {{product.price}}</span>
-                                <a class="col-4 col-sm-5 col-md-4 offset-md-0 btn btn-outline-danger update_cart" data-product="{{product.id}}" data-action="add">
+                                <a class="col-4 col-sm-5 col-md-4 offset-md-0 btn btn-outline-danger update_cart show_add_to_cart_popup" data-product="{{product.id}}" data-action="add">
                                     <span class="fas fa-cart-plus fa-lg"></span>
                                 </a>
                             </div>
@@ -69,4 +69,14 @@
     {% endif %}
 {% endfor %}
 
+<!-- Popup when an item is added to cart -->
+<div class="container add_to_cart_popup_message">
+    <div class="row justify-content-center">
+        <div class="col-3 add_to_cart_popup">
+            <div class="mt-4 mb-4 text-center">
+                <div> <img src="{% static 'images/dalisay_logo_no_bg.png'%}" height="60" alt="" loading="lazy"></div>
+                <br> <h5> Your item has been added <br>to the cart!</h5></div>
+        </div>
+    </div>
+</div>
 {% endblock %}
