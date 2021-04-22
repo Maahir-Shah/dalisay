@@ -111,6 +111,25 @@ $(document).ready(function() {
 });
 */
 
+//Function to set cookie policy to be accepted (adding to LocalStorage)
+var cookie_policy = document.getElementById('cookie_poliy_accept')
+cookie_policy.addEventListener('click', function() {
+    sessionStorage.setItem('cookie_poliy_status', 'accepted');
+    $("#cookie_poliy_alert").hide();
+  }
+);
+
+$(document).ready(function() {
+  var cookie_poliy_status = sessionStorage.getItem('cookie_poliy_status');
+  if (cookie_poliy_status == 'accepted') {
+    $("#cookie_poliy_alert").hide();
+
+  }
+  else {
+    pass;
+  }
+});
+
 // Function to create cart cookies
 function getCookie(name) {
     // Split cookie string and get all individual name=value pairs in an array

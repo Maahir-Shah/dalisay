@@ -12,6 +12,7 @@ from .models import *
 # Define the Category admin
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'visible')
+    ordering = ('title',)
 admin.site.register(Category, CategoryAdmin)
 
 # Define the Customer admin
