@@ -11,6 +11,12 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/91b553d820.js" crossorigin="anonymous"></script>
     <title>Dalisay - Sinfully Pure</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'favicon_io/apple-touch-icon.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'favicon_io/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'favicon_io/favicon-16x16.png'%}">
+    <link rel="manifest" href="{%static 'favicon_io/site.webmanifest'%}">
   </head>
 
   <style>
@@ -265,6 +271,7 @@
       border-radius: 10px;
       margin-top: 6%;
       width: 100%;
+      height:75%;
       z-index: 4;
       overflow-y:scroll;
       overflow-x:hidden;
@@ -612,8 +619,8 @@
           <div id="shopping_cart_item_hamper_price" class="mt-3 col-3 text-left ml-n3">
             {{order.hamper_price}}
           </div>
-          <div class="col-12 text-muted text-left" style="font-size: 11px;">
-            The additional cost has been added to the total amount
+          <div class="col-12 text-muted text-left" style="font-size: 12px;">
+            The Price is based on the total number of items in the cart
           </div>
         </div>
 
@@ -628,8 +635,18 @@
             0
             {% endif %}
           </div>
-          <div class="col-12 text-muted text-left" style="font-size: 11px;">
+          <div class="col-12 text-muted text-left" style="font-size: 12px;">
             We offer free delivery for orders above Rs. 1500
+          </div>
+        </div>
+
+        <div class="row justify-content-left">
+          <div class="mt-3 col-8">
+            <strong>Refund and Returns</strong>
+          </div>
+          <div class="col-12 text-muted text-left" style="font-size: 14px;">
+            Please note that we do not offer Refunds for orders <br> <br>
+            However, if you do receive a damaged or contaminated product, please contact us immediately and we will gladly replace it.
           </div>
         </div>
 
@@ -674,7 +691,7 @@
               </div>
               <div class="col-md-6 col-lg-4">
                   <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Contact Us</h6>
-                  <p><i class="fas fa-phone mr-2 fa-lg"></i> +91 9820297966</p>
+                  <p><i class="fas fa-phone mr-2 fa-lg"></i> +91 9820296098</p>
                   <p class="text-left pl-4 ml-3">+91 9820297966</p>
                   <p><i class="fas fa-envelope mr-3 fa-lg"></i><a href="mailto:connect@dalisay.co.in" style="color:#fffbfb;">connect@dalisay.co.in</a></p>
                   <p><i class="fas fa-map-marker-alt mr-3 fa-lg"></i>Malabar Hill, Mumbai</p>
