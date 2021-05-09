@@ -19,6 +19,41 @@
     </div>
 </div>
 
+<div class="container text-center">
+    <div class="logo_text_added text mt-4">
+        Hamper
+    </div>
+    <div class="logo_text_added" style="font-size: 27px;">Thoughtful gifting made easy!</div>
+    <div class="col-12 mb-4" style="font-size: 18px;">
+        Have a special occasion coming up? Share the love by going one step further!
+        Gift our products in a customized, well-decorated hamper, suitable for any occasion!
+        Each basket is specially selected for you to make your special occasion even better!<br><br>
+        <strong>How To?</strong> Select the 'Hamper' option in the Shopping cart, and the items will be delivered to you in a gift-basket. <br>
+        <strong>Pricing?</strong>The price is based on the total number of items in your Shopping Cart. Please see below for more details
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-6 col-md-4 col-lg-3 mb-2">
+            <div class="card" style="height: 100px">
+                <div class="mt-2 mb-2"> <span class="font-italic text" style="font-size: 24px;">1-4 items</span></div>
+                <div class="mb-2"> <span class="font-italic text" style="font-size: 24px;">Rs. 200</span></div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-2">
+            <div class="card" style="height: 100px">
+                <div class="mt-2 mb-2"> <span class="font-italic text" style="font-size: 24px;">4-8 items</span></div>
+                <div class="mb-2"> <span class="font-italic text" style="font-size: 24px;">Rs. 400</span></div>
+            </div>
+        </div>
+        <div class="col-8 col-sm-6 col-md-4 col-lg-3 mb-2">
+            <div class="card" style="height: 100px">
+                <div class="mt-2 mb-2"> <span class="font-italic text" style="font-size: 24px;">More than 8 items</span></div>
+                <div class="mb-2"> <span class="font-italic text" style="font-size: 24px;">Rs. 600</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="mb-4">
 {% for category in categories %}
 {% if category.visible %}
@@ -38,8 +73,8 @@
                     <div class="animate_product show-on-scroll card">
                         <img src="{%static 'images/dalisay_background_card.png'%}" class="img-fluid justify-content-end" alt="">
                         <div class="card-body d-flex flex-column">
-                            <h6 class="card-title">{{product.name}}</h6>
-                            <p class="text-muted">{{product.description}}</p>
+                            <h6 class="card-title" style="font-size: 19px;">{{product.name}}</h6>
+                            <p class="text-muted" style="font-size: 17px;">{{product.description}}</p>
 
                             {% if product.vegan %}
                             <div class="text-left"><span class="mr-3 mb-3 fas fa-leaf fa-lg"></span> Vegan</div>

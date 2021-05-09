@@ -18,8 +18,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{%static 'favicon_io/favicon-16x16.png'%}">
     <link rel="manifest" href="{%static 'favicon_io/site.webmanifest'%}">
 
+    <!-- Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
   </head>
   <style>
+    /* Change font of entire website */
+    body {
+        font-family: 'Crimson Text', serif !important;
+        font-size: 18px;
+    }
+    
     /* Change color of highlighting in the website*/
     ::-moz-selection { background: #ec215057; }
     ::selection { background: #ec215057; }
@@ -217,14 +227,14 @@
                                 <div class="shopping_cart_item col-12 d-flex">
                                     <div class="mt-2 mb-2 col-8 compress_info">
                                         <h6>
-                                            <strong id="shopping_cart_item_name">{{item.product.name}}</strong>
+                                            <strong id="shopping_cart_item_name" style="font-size: 19px;">{{item.product.name}}</strong>
                                             <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
                                         </h6>
-                                        <div id="shopping_cart_item_category">
+                                        <div id="shopping_cart_item_category" style="font-size: 18px;">
                                             {{item.product.category}}
                                         </div>
                                         <div id="product_details" class="collapse">
-                                            <div id="shopping_cart_item_description" class="text-muted mb-1">
+                                            <div id="shopping_cart_item_description" class="text-muted mb-1" style="font-size: 17px;">
                                                 {{item.product.description}}
                                             </div>
                                             <div id="product_tags" class="d-inline">
@@ -264,7 +274,7 @@
                         <div class="col-12">
                             <strong>Order Note</strong>
 
-                            <div class="text-muted mb-2">
+                            <div class="text-muted mb-2" style="font-size: 17px;">
                                 {% if order.note == '' %}
                                 No Note To Add
                                 {% else %}
@@ -291,7 +301,7 @@
 
                             <strong> Delivery</strong>
                             <div class="row mb-2">
-                                <div class="col-8 text-muted">
+                                <div class="col-8 text-muted" style="font-size: 17px;">
                                     Delivery Cost
                                 </div>
                                 <div id="shopping_cart_item_delivery_price" class="col-1 text-right">
@@ -303,7 +313,7 @@
                                         {% endif %}
                                     </span>
                                 </div>
-                                <div class="col-12 text-muted text-left" style="font-size: 12px;">
+                                <div class="col-12 text-muted text-left" style="font-size: 14px;">
                                     We offer free delivery for orders above Rs. 1500
                                 </div>
                             </div>

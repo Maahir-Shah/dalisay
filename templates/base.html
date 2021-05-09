@@ -17,12 +17,22 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{%static 'favicon_io/favicon-32x32.png'%}">
     <link rel="icon" type="image/png" sizes="16x16" href="{%static 'favicon_io/favicon-16x16.png'%}">
     <link rel="manifest" href="{%static 'favicon_io/site.webmanifest'%}">
+
+    <!-- Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
   </head>
 
   <style>
+    /* Change font of entire website */
+    body {
+      font-family: 'Crimson Text', serif !important;
+      font-size: 18px;
+    }
+    
     /* Change color of highlighting in the website*/
-    ::-moz-selection { background: #ec215057; }
-    ::selection { background: #ec215057; }
+    ::-moz-selection {background: #ec215057;}
+    ::selection {background: #ec215057;}
 
     /* Styling the loader screen */
     .loader {
@@ -110,6 +120,11 @@
       src: url("{%static 'fonts/DINPro-Regular.otf'%}");
     }
 
+    @font-face {
+      font-family: 'Angelina_font';
+      src: url("{%static 'fonts/Angelina.ttf'%}");
+    }
+
     /* Navbar styling */
     .navbar {
       background: none;
@@ -186,6 +201,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      padding: 0.2em;
     }
 
     /* Styling the product cards on the products page */
@@ -394,10 +410,6 @@
         margin-top: 18%;
       }
 
-      .contact_address_text {
-        font-size: 13px;
-      }
-
       /* Alter size of Dalisay logo on About Us page */
       .dalisay_about_image {
         height:auto;
@@ -509,14 +521,14 @@
               <div class="shopping_cart_item col-11 d-flex">
                 <div class="mt-3 mb-3 col-8 compress_info">
                     <h6>
-                      <strong id="shopping_cart_item_name">Product Name</strong>
+                      <strong id="shopping_cart_item_name" style="font-size: 19px;">Product Name</strong>
                       <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
                     </h6>
-                    <div id="shopping_cart_item_category">
+                    <div id="shopping_cart_item_category" style="font-size: 18px;">
                       Product Category
                     </div>
                     <div id="product_details" class="collapse">
-                      <div id="shopping_cart_item_description" class="text-muted mb-2">
+                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 17px;">
                         Product Description
                       </div>
                       <div id="product_tags" class="d-inline">
@@ -550,14 +562,14 @@
               <div class="shopping_cart_item col-11 d-flex">
                 <div class="mt-3 mb-3 col-8 compress_info">
                     <h6>
-                      <strong id="shopping_cart_item_name">{{item.product.name}}</strong>
+                      <strong id="shopping_cart_item_name" style="font-size: 19px;">{{item.product.name}}</strong>
                       <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
                     </h6>
-                    <div id="shopping_cart_item_category">
+                    <div id="shopping_cart_item_category" style="font-size: 18px;">
                       {{item.product.category}}
                     </div>
                     <div id="product_details" class="collapse">
-                      <div id="shopping_cart_item_description" class="text-muted mb-2">
+                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 17px;">
                         {{item.product.description}}
                       </div>
                       <div id="product_tags" class="d-inline">
@@ -598,7 +610,7 @@
           </div>
           <div class="mb-2 col-12">
             {% if order.note == '' %}
-            <input id="order_note" class="form-control" type="text" placeholder="Add Note To Order" value="">
+            <input id="order_note" class="form-control" type="text" placeholder="Add Special Instructions or Note To Order" value="">
             {% else %}
             <input id="order_note" class="form-control" type="text" placeholder="Add Note To Order" value="{{order.note}}">
             {% endif %}
@@ -619,7 +631,7 @@
           <div id="shopping_cart_item_hamper_price" class="mt-3 col-3 text-left ml-n3">
             {{order.hamper_price}}
           </div>
-          <div class="col-12 text-muted text-left" style="font-size: 12px;">
+          <div class="col-12 text-muted text-left" style="font-size: 14px;">
             The Price is based on the total number of items in the cart
           </div>
         </div>
@@ -635,7 +647,7 @@
             0
             {% endif %}
           </div>
-          <div class="col-12 text-muted text-left" style="font-size: 12px;">
+          <div class="col-12 text-muted text-left" style="font-size: 14px;">
             We offer free delivery for orders above Rs. 1500
           </div>
         </div>
@@ -644,7 +656,7 @@
           <div class="mt-3 col-8">
             <strong>Refund and Returns</strong>
           </div>
-          <div class="col-12 text-muted text-left" style="font-size: 14px;">
+          <div class="col-12 text-muted text-left" style="font-size: 16px;">
             Please note that we do not offer Refunds for orders <br> <br>
             However, if you do receive a damaged or contaminated product, please contact us immediately and we will gladly replace it.
           </div>
@@ -734,7 +746,7 @@
 
     <!-- Cookie Policy Alert -->
     <div id="cookie_poliy_alert" style="z-index: 999;">
-      <div class="container-fluid" style="left:2.5%; width: 95%; position:fixed; bottom:20px; background:#fffbfb; border-radius: 15px;">
+      <div class="container-fluid notices" style="left:2.5%; width: 95%; position:fixed; bottom:20px; background:#fffbfb; border-radius: 15px;">
         <div class="row mt-3 mb-3">
           <div class="col-12 col-sm-9 col-md-10 col-xl-11">
             This site uses cookies to provide you with a great user experience. 
