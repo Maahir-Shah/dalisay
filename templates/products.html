@@ -73,19 +73,19 @@
                     <div class="animate_product show-on-scroll card">
                         <img src="{%static 'images/dalisay_background_card.png'%}" class="img-fluid justify-content-end" alt="">
                         <div class="card-body d-flex flex-column">
-                            <h6 class="card-title" style="font-size: 19px;">{{product.name}}</h6>
-                            <p class="text-muted" style="font-size: 17px;">{{product.description}}</p>
+                            <h6 class="card-title" style="font-size: 18px;">{{product.name}}</h6>
+                            <div class="text-muted mb-1" style="font-size: 16px;">{{product.description}}</div>
 
                             {% if product.vegan %}
-                            <div class="text-left"><span class="mr-3 mb-3 fas fa-leaf fa-lg"></span> Vegan</div>
+                            <div class="text-left"><span class="mr-3 mb-2 fas fa-leaf fa-sm"></span> Vegan</div>
                             {% endif %}
 
                             {% if product.gluten_free %}
-                            <div class="text-left"><span class="mr-3 mb-3 fab fa-glide-g fa-lg"></span> Gluten-Free</div>
+                            <div class="text-left"><span class="mr-3 mb-2 fab fa-glide-g fa-sm"></span> Gluten-Free</div>
                             {% endif %}
                             
                             {% if product.customizable %}
-                            <div class="text-left"><span class="mr-3 mb-3 fas fa-info fa-lg"></span> Customizable</div>
+                            <div class="text-left"><span class="mr-3 mb-2 fas fa-info fa-sm"></span> Customizable</div>
                             {% endif %}
 
                             <div class="row mt-auto">

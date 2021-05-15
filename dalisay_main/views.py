@@ -4,6 +4,7 @@ import json
 from django.http import JsonResponse
 from .utils import cookieCart, guestOrder
 import datetime
+from operator import attrgetter
 
 #Imports for PayU
 from django.http import HttpResponse,HttpResponseRedirect
@@ -46,6 +47,7 @@ def about(request):
 
 def products(request):
     categories = Category.objects.all()
+    categories = sorted(categories, key=attrgetter('title'))
     products = Product.objects.all()
 
     try:

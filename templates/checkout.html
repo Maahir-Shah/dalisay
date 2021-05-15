@@ -185,22 +185,22 @@
                             <div class="shopping_cart_item col-12 d-flex">
                                 <div class="mt-2 mb-2 col-8 compress_info">
                                     <h6>
-                                        <strong id="shopping_cart_item_name">Product Name</strong>
+                                        <strong id="shopping_cart_item_name" style="font-size: 19px;">Product Name</strong>
                                         <a class="expand_products_toggle ml-1 fas fa-angle-down fa-lg" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="product_details" style="color: red;"></a>
                                     </h6>
-                                    <div id="shopping_cart_item_category">
+                                    <div id="shopping_cart_item_category" style="font-size: 18px;">
                                         Product Category
                                     </div>
                                     <div id="product_details" class="collapse">
-                                        <div id="shopping_cart_item_description" class="text-muted mb-1">
+                                        <div id="shopping_cart_item_description" class="text-muted mb-1" style="font-size: 16px;">
                                             Product Description
                                         </div>
                                         <div id="product_tags" class="d-inline">
-                                            <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-lg"></span>
+                                            <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-sm"></span>
                         
-                                            <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                                            <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-sm"></span>
                                                 
-                                            <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-lg"></span>
+                                            <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-sm"></span>
                                         </div>
                                     </div>
                                     <div>
@@ -234,20 +234,20 @@
                                             {{item.product.category}}
                                         </div>
                                         <div id="product_details" class="collapse">
-                                            <div id="shopping_cart_item_description" class="text-muted mb-1" style="font-size: 17px;">
+                                            <div id="shopping_cart_item_description" class="text-muted mb-1" style="font-size: 16px;">
                                                 {{item.product.description}}
                                             </div>
                                             <div id="product_tags" class="d-inline">
                                                 {% if item.product.vegan %}
-                                                <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-lg"></span>
+                                                <span id="shopping_cart_item_vegan" class="mr-3 mb-2 fas fa-leaf fa-sm"></span>
                                                 {% endif %}
                             
                                                 {% if item.product.gluten_free %}
-                                                <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                                                <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-sm"></span>
                                                 {% endif %}
                                                     
                                                 {% if item.product.customizable %}
-                                                <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-lg"></span>
+                                                <span id="shopping_cart_item_customizable" class="mr-3 mb-2 fas fa-info fa-sm"></span>
                                                 {% endif %}
                                             </div>
                                         </div>

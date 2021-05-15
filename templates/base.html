@@ -206,7 +206,7 @@
 
     /* Styling the product cards on the products page */
     .card {
-      height: 300px;
+      height: 320px;
       border-radius: 10px;
       background: #fffbfb;
     }
@@ -528,15 +528,15 @@
                       Product Category
                     </div>
                     <div id="product_details" class="collapse">
-                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 17px;">
+                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 16px;">
                         Product Description
                       </div>
                       <div id="product_tags" class="d-inline">
-                        <span id="shopping_cart_item_vegan" class="mr-3 mb-3 fas fa-leaf fa-lg"></span>
+                        <span id="shopping_cart_item_vegan" class="mr-3 mb-3 fas fa-leaf fa-sm"></span>
 
-                        <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                        <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-sm"></span>
                           
-                        <span id="shopping_cart_item_customizable" class="mr-3 mb-3 fas fa-info fa-lg"></span>
+                        <span id="shopping_cart_item_customizable" class="mr-3 mb-3 fas fa-info fa-sm"></span>
                       </div>
                     </div>
                     <div>
@@ -569,20 +569,20 @@
                       {{item.product.category}}
                     </div>
                     <div id="product_details" class="collapse">
-                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 17px;">
+                      <div id="shopping_cart_item_description" class="text-muted mb-2" style="font-size: 16px;">
                         {{item.product.description}}
                       </div>
                       <div id="product_tags" class="d-inline">
                         {% if item.product.vegan %}
-                        <span id="shopping_cart_item_vegan" class="mr-3 mb-3 fas fa-leaf fa-lg"></span>
+                        <span id="shopping_cart_item_vegan" class="mr-3 mb-3 fas fa-leaf fa-sm"></span>
                         {% endif %}
 
                         {% if item.product.gluten_free %}
-                        <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-lg"></span>
+                        <span id="shopping_cart_item_gluten_free" class="mr-3 mb-3 fab fa-glide-g fa-sm"></span>
                         {% endif %}
                           
                         {% if item.product.customizable %}
-                        <span id="shopping_cart_item_customizable" class="mr-3 mb-3 fas fa-info fa-lg"></span>
+                        <span id="shopping_cart_item_customizable" class="mr-3 mb-3 fas fa-info fa-sm"></span>
                         {% endif %}
                       </div>
                     </div>
