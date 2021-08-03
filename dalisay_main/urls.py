@@ -14,6 +14,6 @@ urlpatterns = [
     path('process_payment/', views.process_payment, name= 'process_payment'),
     path('payment_success/', views.payment_success, name= 'payment_success'),
     path('payment_failure/', views.payment_failure, name= 'payment_failure'),
-
+    path('policies/terms_and_conditions/', views.terms_and_conditions, name= 'terms_and_conditions'),
     ]
     

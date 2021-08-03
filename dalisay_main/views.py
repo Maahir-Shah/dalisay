@@ -187,6 +187,10 @@ def process_order(request):
 
     return JsonResponse('Order Complete', safe=False)
 
+def terms_and_conditions(request):
+
+    return render(request, 'terms_conditions.html')
+    
 def process_payment(request):
 
     MERCHANT_KEY = "epTi4Mxn"
