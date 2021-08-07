@@ -15,5 +15,7 @@ urlpatterns = [
     path('payment_success/', views.payment_success, name= 'payment_success'),
     path('payment_failure/', views.payment_failure, name= 'payment_failure'),
     path('policies/terms_and_conditions/', views.terms_and_conditions, name= 'terms_and_conditions'),
+    path('policies/privacy_policy/', views.privacy_policy, name= 'privacy_policy'),
+    path('policies/delivery_returns_refunds_policy/', views.delivery_returns_refunds_policy, name= 'delivery_returns_refunds_policy'),
     ]
     

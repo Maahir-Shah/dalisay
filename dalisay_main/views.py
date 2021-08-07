@@ -190,6 +190,14 @@ def process_order(request):
 def terms_and_conditions(request):
 
     return render(request, 'terms_conditions.html')
+
+def privacy_policy(request):
+
+    return render(request, 'privacy_policy.html')
+
+def delivery_returns_refunds_policy(request):
+
+    return render(request, 'delivery_returns_refunds_policy.html')
     
 def process_payment(request):
 
