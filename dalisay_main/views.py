@@ -198,6 +198,10 @@ def privacy_policy(request):
 def delivery_returns_refunds_policy(request):
 
     return render(request, 'delivery_returns_refunds_policy.html')
+
+def ssl_validation(request):
+
+    return render(request, '53AB5CD43CADE420AC41ECB9400C0DF9.txt')
     
 def process_payment(request):
 

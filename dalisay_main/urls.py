@@ -17,5 +17,7 @@ urlpatterns = [
     path('policies/terms_and_conditions/', views.terms_and_conditions, name= 'terms_and_conditions'),
     path('policies/privacy_policy/', views.privacy_policy, name= 'privacy_policy'),
     path('policies/delivery_returns_refunds_policy/', views.delivery_returns_refunds_policy, name= 'delivery_returns_refunds_policy'),
+    path('.well-known/pki-validation/53AB5CD43CADE420AC41ECB9400C0DF9.txt/', views.ssl_validation, name= 'ssl_validation'),
+    
     ]
     
