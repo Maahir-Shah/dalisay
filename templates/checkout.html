@@ -153,7 +153,7 @@
 
   </style>
   <body class="backdrop">
-      <!-- Loader Screen -->
+    <!-- Loader Screen -->
     <div class="loader">
         <img class="loader_image w-25" src="{% static 'images/dalisay_logo_no_bg.png'%}" alt="">
     </div>
@@ -451,7 +451,7 @@
                             </form>
                             <form id="payment_details_form" method="POST" action="../process_payment/">
                                 {% csrf_token %}
-                                <input type="hidden" name="firstname" value="" />            
+                                <input type="hidden" name="firstname" value="" />
                                 <input type="hidden" name="amount" value="" />
                                 <input type="hidden" name="email" value="" />
                                 <input type="hidden" name="phone" value="" />
@@ -538,7 +538,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- Javascript for Functionality of Checkout Page -->
-    <script type="text/javascript" src= "{% static 'js/checkout_1.js' %}"></script>
+    <script type="text/javascript" src= "{% static 'js/checkout_2.js' %}"></script>
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">

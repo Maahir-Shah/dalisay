@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<!-- Font Awesome Icons -->
+		<script src="https://kit.fontawesome.com/91b553d820.js" crossorigin="anonymous"></script>
+		<title>Dalisay - Sinfully Pure</title>
+	
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="{%static 'favicon_io/apple-touch-icon.png'%}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{%static 'favicon_io/favicon-32x32.png'%}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{%static 'favicon_io/favicon-16x16.png'%}">
+		<link rel="manifest" href="{%static 'favicon_io/site.webmanifest'%}">
+	
+		<!-- Fonts-->
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+	
+	</head>
+	
+	<style>
+		/* Change font of entire website */
+		body {
+			font-family: 'Crimson Text', serif !important;
+			font-size: 18px;
+		}
+		
+		/* Change color of highlighting in the website*/
+		::-moz-selection { background: #ec215057; }
+		::selection { background: #ec215057; }
+	
+		/* Background of website */
+		.backdrop {
+			background-image: url("{%static 'images/marble_backdrop.jpg'%}");
+		}
+	
+		/* Logo on the fixed navbar */
+		.corner_logo {
+			position: absolute;
+			z-index: 4;
+		}
+	
+		/* Fixed Navabar at top on pages other than homepage */
+		#fixed_navbar {
+			height: 50px;
+			background: #fffbfb;
+			z-index: 3;
+		}
+	
+		/* Font of Dalisay main logo */
+		@font-face {
+			font-family: 'dalisay_main_font';
+			src: url("{%static 'fonts/dalisay_logo_font.ttf'%}");
+		}
+
+		/* Styling the outermost checkout layout */
+		.checkout_layout {
+			background: #fffbfb;
+			border-radius: 20px;
+			border: 2px solid #ec215079;
+		}
+
+		/* Styling any text to be added as a gradient */
+		.text {
+			background: linear-gradient(to right, #ec2151 , #f3592e);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			padding: 0.2em;
+			}
+	</style>
+	<body class="backdrop">
+		<a class="corner_logo" href="../home">
+			<img class="mt-2" src="{% static 'images/dalisay_logo_no_bg.png'%}" height="40" alt="">
+		</a>
+		<div id="fixed_navbar" class="container-fluid">
+		</div>
+
+		<div class="checkout_layout container" style="margin-top: 10vh; margin-bottom: 10vh">
+			<div class="row justify-content-center">
+				<div class="mt-5 mb-5 col-11 col-lg-8 mt-3 mb-3" style="background: none; height: 100%">
+					<div class="mt-2 mb-1 col-12 text-center text"><h1>Transaction Failed!</h1></div>
+					<div class="mt-1 mb-4 col-12 text-center">
+						<h4>Oops! It looks like there was an error during the payment process.</h4>
+						<h5>Click the link below to return to the Checkout page and try again</h5>
+					</div>
+
+					<div class="justify-content-center text-center">
+						<button class="col-8 col-md-6 col-lg-4 mt-2 btn btn-danger text-center" type="submit">
+							<a href="../checkout" style="color: #fffbfb;"><div class="mt-2 mb-2" style="font-size: 19px;"> Return to Checkout Page </div></a>
+						</button>
+					</div>
+
+					<div class="mt-5 mb-3 col-12 text-center">
+						<h5>If you continue to experience difficulties with this process, please Contact Us so that we can assist you as soon as possible</h5>
+					</div>
+
+					<div class="mb-5 justify-content-center text-center">
+						<button class="col-8 col-md-6 col-lg-4 mt-2 btn btn-danger text-center" type="submit">
+							<a href="../contact" style="color: #fffbfb;"><div class="mt-2 mb-2" style="font-size: 19px;"> Contact Us </div></a>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

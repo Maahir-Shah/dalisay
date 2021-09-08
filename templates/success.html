@@ -1,12 +1,25 @@
-<html>
-<body>
-<div style="display:none">
-   	<input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
-</div>
-<h4>Thank You.</h4>
-<h4>Your order status is {{ status }}</h4>
-<h4>Your Transaction ID for this transaction is {{ txnid }}</h4>
-<h4>We have received a payment of Rs {{ amount}}</h4> 
+{% load static %}
+<!doctype html>
+<html lang="en">
+	<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-</body>
+	<title>Dalisay - Sinfully Pure</title>
+
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="{%static 'favicon_io/apple-touch-icon.png'%}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{%static 'favicon_io/favicon-32x32.png'%}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{%static 'favicon_io/favicon-16x16.png'%}">
+	<link rel="manifest" href="{%static 'favicon_io/site.webmanifest'%}">
+
+	<script>window.location.href = "../payment_success_page";</script>
+
+	</head>
+
+
+	<body>
+
+	</body>
 </html>

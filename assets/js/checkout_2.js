@@ -285,10 +285,12 @@ delivery_form_postal.addEventListener('change', function() {
 
 // Function to send Order + Delivery details to Backend
 let checkout_button = document.getElementById('delivery_form_submit');
-checkout_button.addEventListener('click', function() {
-    var checkout_price;
-    processCheckout();
-})
+
+checkout_button.onclick = function() {
+    if ($('#verification_name').hasClass('fa-check') && $('#verification_email').hasClass('fa-check') && $('#verification_phone').hasClass('fa-check') && $('#verification_address').hasClass('fa-check') && $('#verification_city').hasClass('fa-check') && $('#verification_postal').hasClass('fa-check')) {
+        processCheckout();
+    }
+}
 
 function processCheckout() {
     cart_cookie = JSON.parse(getCookie('cart'));
@@ -306,6 +308,7 @@ function processCheckout() {
     })
     .then((response) => response.json())
     .then((data) => {
+        document.cookie = "cart =" + JSON.stringify(cart_cookie) + ';domain=;expires='+now.toGMTString()+';path=/';
         checkout_price = data['order']['total_with_delivery'];
         submitData();
     })
@@ -313,37 +316,19 @@ function processCheckout() {
 
 function submitData() {
     let form = document.getElementById('delivery_form');
-    let csrftoken_form = form.getElementsByTagName("input")[0].value
     let UserDeliveryDetails = {
         'name': form.name.value,
         'email': form.email.value,
         'phone_number': form.phone_number.value,
         'address': form.address.value,
         'city': form.city.value,
-        'postal_code': form.postal_code.value
+        'postal_code': form.postal_code.value,
+        'amount': checkout_price.toFixed(2)
     }
 
-    var url = '/process_order/'
-    fetch(url, {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken_form,
-            mode: 'same-origin'
-        },
-        body:JSON.stringify({
-            'delivery_details': UserDeliveryDetails,
-            'cart_total': checkout_price
-        })
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        proceedToPayment();
+    document.cookie = "dd=" + JSON.stringify(UserDeliveryDetails) + ';domain=;expires='+now.toGMTString()+';path=/';
 
-        // cart = {'order_note': '', 'hamper': false}
-        // document.cookie = "cart =" + JSON.stringify(cart) + ';domain=;expires='+now.toGMTString()+';path=/';
-    })
+    proceedToPayment();
 }
 
 function proceedToPayment() {

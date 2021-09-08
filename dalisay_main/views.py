@@ -2,10 +2,10 @@ from django.shortcuts import render
 from .models import *
 import json
 from django.http import JsonResponse
-from .utils import cookieCart, guestOrder
+from .utils import cookieCart, process_order
 import datetime
-from operator import attrgetter
-
+from operator import add, attrgetter
+import requests
 #Imports for PayU
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template.loader import get_template
@@ -104,89 +104,6 @@ def checkout(request):
         'order': order
     })
 
-def process_order(request):
-    transaction_id = datetime.datetime.now().timestamp()
-
-    # Obtaining the Delivery form data
-    data = json.loads(request.body)
-
-    name = data['delivery_details']['name']
-    email = data['delivery_details']['email']
-    phone_number = data['delivery_details']['phone_number']
-    address = data['delivery_details']['address']
-    city = data['delivery_details']['city']
-    postal_code = data['delivery_details']['postal_code']
-
-    # Obtaining the Order cart data
-    try:
-        cart = json.loads(request.COOKIES['cart'])
-    except:
-        cart = {}
-    cart_details = cookieCart(cart)
-    
-    order_items = cart_details['order_items']
-    order_details = cart_details['order']
-
-    hamper_price = order_details['hamper_price'] 
-    if hamper_price == '':
-        hamper_price = 0
-    # Creating a customer object
-    customer, created = Customer.objects.get_or_create (
-        email = email
-    )
-    customer.name = name
-    customer.save()
-
-    # Creating a new order object
-    order = Order.objects.create (
-        customer = customer,
-        complete = False,
-        transaction_id = transaction_id,
-        total = order_details['total'],
-        number_of_items = order_details['number_of_items'],
-        note = order_details['note'],
-        hamper = order_details['hamper'],
-        hamper_price = hamper_price,
-        payment_complete = False
-    )
-    
-    item_list = ''
-
-    # Creating new OrderItem objects for each item, and creating a list of items for Order object
-    for item in order_items:
-        product = Product.objects.get(id=item['product']['id'])
-
-        order_item = OrderItem.objects.create (
-            product = product,
-            order = order,
-            quantity = item['quantity']
-        )
-
-        item_product = str(product.name)
-        item_category = str(product.category)
-        item_quantity = str(item['quantity'])
-        item_entry = item_product + " (" + item_category + ', Quantity: ' + item_quantity + ")\n"
-        item_list += item_entry
-    
-    order.items = item_list
-    if order.total == data['cart_total']:
-        order.payment_complete = True
-    order.save()
-    
-    # Creating a new DeliveryDetails object
-    delivery = DeliveryDetails.objects.create (
-        customer = customer,
-        name = customer.name,
-        email = customer.email,
-        phone_number = phone_number,
-        address = address,
-        city = city,
-        postal_code = postal_code,
-        order = order
-    )
-
-    return JsonResponse('Order Complete', safe=False)
-
 def terms_and_conditions(request):
 
     return render(request, 'terms_conditions.html')
@@ -247,6 +164,8 @@ def process_payment(request):
 @csrf_protect
 @csrf_exempt
 def payment_success(request):
+
+    #Verifying payment transaction
     c = {}
     c.update(csrf(request))
     status=request.POST["status"]
@@ -259,18 +178,51 @@ def payment_success(request):
     email=request.POST["email"]
     salt="hlV2iVOd9M"
     retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
-    hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+    retHashEnc = retHashSeq.encode()
+    hashh=hashlib.sha512(retHashEnc).hexdigest().lower()
     if(hashh !=posted_hash):
         print ("Invalid Transaction. Please try again")
     else:
     	print ("Thank You. Your order status is ", status)
     	print ("Your Transaction ID for this transaction is ",txnid)
     	print ("We have received a payment of Rs. ", amount ,". Your order will soon be shipped.")
+
     return render(request, 'success.html', {
         "txnid":txnid,
-        "status":status,
         "amount":amount
         })
+
+def payment_success_page(request):
+
+    txnid = datetime.datetime.now().timestamp()
+    try:
+        cart = json.loads(request.COOKIES['cart'])
+    except:
+        cart = {}
+    
+    cart_details = cookieCart(cart)
+    order_items = cart_details['order_items']
+    order = cart_details['order']
+
+    data = json.loads(request.COOKIES['dd'])
+
+    delivery_details = {
+    'name': data['name'],
+    'email': data['email'],
+    'phone_number': data['phone_number'],
+    'address': data['address'],
+    'city': data['city'],
+    'postal_code': data['postal_code']
+    }
+
+    amount = data['amount']
+    order_creation = process_order(txnid, delivery_details, cart_details, amount)
+    return render(request, 'payment_success.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid
+    })
 
 @csrf_protect
 @csrf_exempt
@@ -287,7 +239,8 @@ def payment_failure(request):
     email=request.POST["email"]
     salt=""
     retHashSeq = salt+'|'+status+'|||||||||||'+email+'|'+firstname+'|'+productinfo+'|'+amount+'|'+txnid+'|'+key
-    hashh=hashlib.sha512(retHashSeq).hexdigest().lower()
+    retHashEnc = retHashSeq.encode()
+    hashh=hashlib.sha512(retHashEnc).hexdigest().lower()
     if(hashh !=posted_hash):
     	print ("Invalid Transaction. Please try again")
     else:
@@ -295,3 +248,6 @@ def payment_failure(request):
     	print ("Your Transaction ID for this transaction is ",txnid)
     	print ("We have received a payment of Rs. ", amount ,". Your order will soon be shipped.")
     return render(request, 'failure.html')
+
+def payment_failure_page(request):
+    return render(request, 'payment_failure.html')
