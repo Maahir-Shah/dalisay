@@ -620,7 +620,7 @@
         <div class="row justify-content-left">
 
           <div class="mt-3 ml-1 col-8">
-            <strong class="mr-2">Make Hamper</strong>
+            <strong class="mr-2">Create Hamper</strong>
 
             {% if order.hamper %}
             <input id="hamper_checkbox" type="checkbox" aria-label="Hamper" checked=true>
@@ -641,14 +641,14 @@
             <strong>Delivery</strong>
           </div>
           <div id="shopping_cart_item_delivery_price" class="mt-3 col-3 text-left ml-n1">
-            {% if order.total < 1500 %}
-            80
+            {% if order.total < 2500 %}
+            200
             {% else %}
             0
             {% endif %}
           </div>
           <div class="col-12 text-muted text-left" style="font-size: 14px;">
-            We offer free delivery for orders above Rs. 1500
+            We offer free delivery for orders above Rs. 2500. Please note that we primarily deliver to areas in South Mumbai.
           </div>
         </div>
 
@@ -771,7 +771,7 @@
     <script type="text/javascript" src= "{% static 'js/main.js' %}"></script>
 
     <!-- Javascript for Functionality of shopping cart -->
-    <script type="text/javascript" src= "{% static 'js/shop_1.js' %}"></script>
+    <script type="text/javascript" src= "{% static 'js/shop_2.js' %}"></script>
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">

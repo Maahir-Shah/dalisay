@@ -160,8 +160,8 @@ function getUserCartInfo() {
         $("#order_note")[0]['value'] == data['order']['note'];
         $('#shopping_cart_item_hamper_price').html(data['order']['hamper_price']);
 
-        if (data['order']['total'] < 1500) {
-            $('#shopping_cart_item_delivery_price').html(80);
+        if (data['order']['total'] < 2500) {
+            $('#shopping_cart_item_delivery_price').html(200);
         }
         else {
             $('#shopping_cart_item_delivery_price').html(0);

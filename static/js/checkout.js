@@ -172,8 +172,8 @@ function getUserCartInfo() {
         }
 
         $('#shopping_cart_item_hamper_price').html(data['order']['hamper_price']);
-        if (data['order']['total'] < 1500) {
-            $('#shopping_cart_item_delivery_price').html(80);
+        if (data['order']['total'] < 2500) {
+            $('#shopping_cart_item_delivery_price').html(200);
         }
         else {
             $('#shopping_cart_item_delivery_price').html(0);
@@ -341,10 +341,10 @@ function proceedToPayment() {
     payment_details_form.firstname.value = firstname
     payment_details_form.email.value = form.email.value
     payment_details_form.phone.value = form.phone_number.value
-    payment_details_form.amount.value = checkout_price // type is integer - need to convert to float in python
+    payment_details_form.amount.value = checkout_price // type should be float
     payment_details_form.productinfo.value = 'Food items added to cart'
-    payment_details_form.surl.value = 'http://127.0.0.1:8000/payment_success'
-    payment_details_form.furl.value = 'http://127.0.0.1:8000/payment_failure'
+    payment_details_form.surl.value = 'http://dalisay.co.in/payment_success' // 127.0.0.1:8000
+    payment_details_form.furl.value = 'http://dalisay.co.in/payment_failure' //127.0.0.1:8000
     payment_details_form.service_provider.value = 'payu_paisa' // Change if needed
 
     payment_details_form.submit();

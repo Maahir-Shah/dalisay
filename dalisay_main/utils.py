@@ -67,8 +67,8 @@ def cookieCart(cart):
         order_note = cart['order_note']
 
         # Consider Delivery
-        if cart_total_price < 1500:
-            delivery = 80
+        if cart_total_price < 2500:
+            delivery = 200
         else:
             delivery = 0
         

@@ -306,15 +306,15 @@
                                 </div>
                                 <div id="shopping_cart_item_delivery_price" class="col-1 text-right">
                                     <span>
-                                        {% if order.total < 1500 %}
-                                        80
+                                        {% if order.total < 2500 %}
+                                        200
                                         {% else %}
                                         0
                                         {% endif %}
                                     </span>
                                 </div>
                                 <div class="col-12 text-muted text-left" style="font-size: 14px;">
-                                    We offer free delivery for orders above Rs. 1500
+                                    We offer free delivery for orders above Rs. 2500. Please note that we primarily deliver to areas in South Mumbai.
                                 </div>
                                 <br>
                             </div>
@@ -538,7 +538,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- Javascript for Functionality of Checkout Page -->
-    <script type="text/javascript" src= "{% static 'js/checkout_2.js' %}"></script>
+    <script type="text/javascript" src= "{% static 'js/checkout.js' %}"></script>
 
     <!-- Optional JavaScript -->
     <script type="text/javascript">

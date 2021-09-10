@@ -221,7 +221,8 @@ def payment_success_page(request):
         'order_items': order_items,
         'order': order,
         'delivery_details': delivery_details,
-        'txnid': txnid
+        'txnid': txnid,
+        'amount': amount
     })
 
 @csrf_protect
