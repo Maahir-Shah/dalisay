@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from .utils import cookieCart, process_order
 import datetime
 from operator import add, attrgetter
-import requests
 #Imports for PayU
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template.loader import get_template
