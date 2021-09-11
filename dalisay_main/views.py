@@ -124,9 +124,9 @@ def process_payment(request):
     MERCHANT_KEY = "epTi4Mxn"
     SALT = "hlV2iVOd9M"
     # Test
-    # PAYU_BASE_URL = "https://sandboxsecure.payu.in/_payment"
+    PAYU_BASE_URL = "https://sandboxsecure.payu.in/_payment"
     # Live 
-    PAYU_BASE_URL = "https://secure.payu.in/_payment"
+    # PAYU_BASE_URL = "https://secure.payu.in/_payment"
 
     action = ''
     posted={}

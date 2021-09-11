@@ -7,6 +7,7 @@ now.setTime(expireTime);
 // Remove Loader screen on loading
 $(window).on("load", function () {
   $(".loader").fadeOut("slow");
+  $(".loader").css("z-index", 900);
 })
 
 // Function to change the active nav on the navbar

@@ -83,7 +83,7 @@
       <br/>
       {% endif %}
      
-      <form action="https://secure.payu.in/_payment" method="post" name="payuForm">
+      <form action="https://sandboxsecure.payu.in/_payment" method="post" name="payuForm">
       {% csrf_token %}
       <input type="" name="key" value="{{ MERCHANT_KEY }}" />
       <input type="" name="hash_string" value="{{ hash_string }}" />
