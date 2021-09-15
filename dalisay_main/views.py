@@ -5,6 +5,12 @@ from django.http import JsonResponse
 from .utils import cookieCart, process_order
 import datetime
 from operator import add, attrgetter
+
+#Imports for Email
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 #Imports for PayU
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template.loader import get_template
@@ -188,14 +194,11 @@ def payment_success(request):
     	print ("Your Transaction ID for this transaction is ",txnid)
     	print ("We have received a payment of Rs. ", amount ,". Your order will soon be shipped.")
 
-    return render(request, 'success.html', {
-        "txnid":txnid,
-        "amount":amount
-        })
+    return render(request, 'success.html')
 
 def payment_success_page(request):
 
-    txnid = datetime.datetime.now().timestamp()
+    txnid = int(datetime.datetime.now().timestamp())
     try:
         cart = json.loads(request.COOKIES['cart'])
     except:
@@ -218,6 +221,45 @@ def payment_success_page(request):
 
     amount = data['amount']
     order_creation = process_order(txnid, delivery_details, cart_details, amount)
+
+    email_template = render_to_string('confirmation_email_template.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid,
+        'amount': amount
+    })
+
+    email = EmailMessage(
+        'Dalisay | Order Confirmation',
+        email_template,
+        settings.EMAIL_HOST_USER,
+        [delivery_details['email']],
+    )
+
+    email.content_subtype = "html"
+    email.fail_silently = False
+    email.send()
+
+    new_order_email_template = render_to_string('new_order_email_template.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid,
+        'amount': amount
+    })
+
+    new_order_email = EmailMessage(
+        'Dalisay | New Order',
+        new_order_email_template,
+        settings.EMAIL_HOST_USER,
+        ['sangeeta@dalisay.co.in']#, 'karishma@dalisay.co.in'],
+    )
+
+    new_order_email.content_subtype = "html"
+    new_order_email.fail_silently = False
+    new_order_email.send()
+
     return render(request, 'payment_success.html', {
         'order_items': order_items,
         'order': order,
@@ -253,3 +295,73 @@ def payment_failure(request):
 
 def payment_failure_page(request):
     return render(request, 'payment_failure.html')
+
+def email(request):
+    txnid = datetime.datetime.now().timestamp()
+    try:
+        cart = json.loads(request.COOKIES['cart'])
+    except:
+        cart = {}
+    
+    cart_details = cookieCart(cart)
+    order_items = cart_details['order_items']
+    order = cart_details['order']
+
+    data = json.loads(request.COOKIES['dd'])
+
+    delivery_details = {
+    'name': data['name'],
+    'email': data['email'],
+    'phone_number': data['phone_number'],
+    'address': data['address'],
+    'city': data['city'],
+    'postal_code': data['postal_code']
+    }
+
+    amount = data['amount']
+
+    email_template = render_to_string('confirmation_email_template.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid,
+        'amount': amount
+    })
+
+    email = EmailMessage(
+        'Dalisay | Order Confirmation',
+        email_template,
+        settings.EMAIL_HOST_USER,
+        [delivery_details['email']],
+    )
+
+    email.content_subtype = "html"
+    email.fail_silently = False
+    email.send()
+
+    new_order_email_template = render_to_string('new_order_email_template.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid,
+        'amount': amount
+    })
+
+    new_order_email = EmailMessage(
+        'Dalisay | New Order',
+        new_order_email_template,
+        settings.EMAIL_HOST_USER,
+        ['sangeeta@dalisay.co.in', 'karishma@dalisay.co.in'],
+    )
+
+    new_order_email.content_subtype = "html"
+    new_order_email.fail_silently = False
+    new_order_email.send()
+
+    return render(request, 'confirmation_email_template.html', {
+        'order_items': order_items,
+        'order': order,
+        'delivery_details': delivery_details,
+        'txnid': txnid,
+        'amount': amount
+    })

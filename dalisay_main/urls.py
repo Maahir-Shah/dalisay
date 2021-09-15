@@ -20,5 +20,7 @@ urlpatterns = [
     path('.well-known/pki-validation/53AB5CD43CADE420AC41ECB9400C0DF9.txt/', views.ssl_validation, name= 'ssl_validation'),
     path('payment_success_page', views.payment_success_page, name= 'payment_success_page'),
     path('payment_failure_page', views.payment_failure_page, name= 'payment_failure_page'),
+
+    path('email', views.email, name= 'confirmation_email_template.html'),
     ]
     
