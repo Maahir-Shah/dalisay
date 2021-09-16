@@ -253,7 +253,7 @@ def payment_success_page(request):
         'Dalisay | New Order',
         new_order_email_template,
         settings.EMAIL_HOST_USER,
-        ['sangeeta@dalisay.co.in']#, 'karishma@dalisay.co.in'],
+        ['sangeeta@dalisay.co.in', 'karishma@dalisay.co.in'] #['maahirshah2000@gmail.com']
     )
 
     new_order_email.content_subtype = "html"
@@ -351,7 +351,7 @@ def email(request):
         'Dalisay | New Order',
         new_order_email_template,
         settings.EMAIL_HOST_USER,
-        ['sangeeta@dalisay.co.in', 'karishma@dalisay.co.in'],
+        ['sangeeta@dalisay.co.in', 'karishma@dalisay.co.in'] #['maahirshah2000@gmail.com']
     )
 
     new_order_email.content_subtype = "html"

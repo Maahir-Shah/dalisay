@@ -343,8 +343,8 @@ function proceedToPayment() {
     payment_details_form.phone.value = form.phone_number.value
     payment_details_form.amount.value = checkout_price // type should be float
     payment_details_form.productinfo.value = 'Food items added to cart'
-    payment_details_form.surl.value = 'https://dalisay.co.in/payment_success' // http://127.0.0.1:8000/payment_success
-    payment_details_form.furl.value = 'https://dalisay.co.in/payment_failure' // http://127.0.0.1:8000/payment_failure
+    payment_details_form.surl.value = 'https://dalisay.co.in/payment_success' //'https://dalisay.co.in/payment_success' // 'http://127.0.0.1:8000/payment_success'
+    payment_details_form.furl.value = 'https://dalisay.co.in/payment_failure' //'https://dalisay.co.in/payment_failure' // 'http://127.0.0.1:8000/payment_failure'
     payment_details_form.service_provider.value = 'payu_paisa' // Change if needed
 
     payment_details_form.submit();
