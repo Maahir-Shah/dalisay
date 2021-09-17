@@ -297,7 +297,7 @@ def payment_failure_page(request):
     return render(request, 'payment_failure.html')
 
 def email(request):
-    txnid = datetime.datetime.now().timestamp()
+    txnid = int(datetime.datetime.now().timestamp())
     try:
         cart = json.loads(request.COOKIES['cart'])
     except:
